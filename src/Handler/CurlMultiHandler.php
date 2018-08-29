@@ -105,7 +105,7 @@ class CurlMultiHandler
             usleep(250);
         }
 
-        while (curl_multi_exec($this->_mh, $this->active) === CURLM_CALL_MULTI_PERFORM);
+        while (is_resource($this->_mh) && $this->_mh !== null && curl_multi_exec($this->_mh, $this->active) === CURLM_CALL_MULTI_PERFORM);
 
         $this->processMessages();
     }
